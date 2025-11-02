@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual env
+venv/
+.env/
+env/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Byte-compiled / compiled
+*.sqlite3
+
+# Logs
+*.log
