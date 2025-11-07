@@ -10,6 +10,10 @@ class MathService(math_pb2_grpc.MathServiceServicer):
         result_value = request.number * request.number
         return math_pb2.SquareResponse(result=result_value)
 
+    def Cube(self, request, context):
+        result_value = request.number * request.number * request.number
+        return math_pb2.SquareResponse(result=result_value)
+
 
 # function that starts and runs the gRPC server
 def serve():
