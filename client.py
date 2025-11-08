@@ -11,8 +11,8 @@ def run():
     stub = math_pb2_grpc.MathServiceStub(channel)
 
     # build the request message and call the remote RPC
-    resp = stub.Square(math_pb2.SquareRequest(number=7))
-
+    # resp = stub.Square(math_pb2.SquareRequest(number=7))
+    resp = stub.Cube(math_pb2.SquareRequest(number=3))
     # use the result (demo)
     print(resp.result)
 
