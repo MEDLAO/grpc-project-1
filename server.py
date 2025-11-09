@@ -14,6 +14,19 @@ class MathService(math_pb2_grpc.MathServiceServicer):
         result_value = request.number * request.number * request.number
         return math_pb2.SquareResponse(result=result_value)
 
+    def Sqrt(self, request, context):
+        number = request.number
+
+        # if invalid input we set an official gRPC error back to client
+        if number < 0:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)  # choose the right error code
+            context.set_details("Number cannot be negative for Sqrt")  # explanation message sent back
+            return math_pb2.SquareResponse()  # empty response must still be returned
+
+        # normal valid case compute normally
+        result_value = int(number ** 0.5)
+        return math_pb2.SquareResponse(result=result_value)
+
 
 # function that starts and runs the gRPC server
 def serve():

@@ -44,6 +44,11 @@ class MathServiceStub(object):
                 request_serializer=math__pb2.SquareRequest.SerializeToString,
                 response_deserializer=math__pb2.SquareResponse.FromString,
                 _registered_method=True)
+        self.Sqrt = channel.unary_unary(
+                '/math.MathService/Sqrt',
+                request_serializer=math__pb2.SquareRequest.SerializeToString,
+                response_deserializer=math__pb2.SquareResponse.FromString,
+                _registered_method=True)
 
 
 class MathServiceServicer(object):
@@ -61,6 +66,12 @@ class MathServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Sqrt(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MathServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -71,6 +82,11 @@ def add_MathServiceServicer_to_server(servicer, server):
             ),
             'Cube': grpc.unary_unary_rpc_method_handler(
                     servicer.Cube,
+                    request_deserializer=math__pb2.SquareRequest.FromString,
+                    response_serializer=math__pb2.SquareResponse.SerializeToString,
+            ),
+            'Sqrt': grpc.unary_unary_rpc_method_handler(
+                    servicer.Sqrt,
                     request_deserializer=math__pb2.SquareRequest.FromString,
                     response_serializer=math__pb2.SquareResponse.SerializeToString,
             ),
@@ -127,6 +143,33 @@ class MathService(object):
             request,
             target,
             '/math.MathService/Cube',
+            math__pb2.SquareRequest.SerializeToString,
+            math__pb2.SquareResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Sqrt(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/math.MathService/Sqrt',
             math__pb2.SquareRequest.SerializeToString,
             math__pb2.SquareResponse.FromString,
             options,

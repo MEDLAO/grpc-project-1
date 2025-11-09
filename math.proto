@@ -5,6 +5,8 @@ package math;
 service MathService {
   rpc Square (SquareRequest) returns (SquareResponse) {}
   rpc Cube (SquareRequest) returns (SquareResponse) {}
+  rpc Sqrt (SquareRequest) returns (SquareResponse) {}
+
 }
 
 message SquareRequest {
