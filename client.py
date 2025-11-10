@@ -12,9 +12,17 @@ def run():
 
     # build the request message and call the remote RPC
     # resp = stub.Square(math_pb2.SquareRequest(number=7))
-    resp = stub.Cube(math_pb2.SquareRequest(number=3))
+    # resp = stub.Cube(math_pb2.SquareRequest(number=3))
     # use the result (demo)
-    print(resp.result)
+    # print(resp.result)
+
+    try:
+        # send a negative number to test server validation
+        resp = stub.Sqrt(math_pb2.SquareRequest(number=-9))
+        print(resp.result)  # gets printed only if NO error happens
+    except grpc.RpcError as e:
+        # this executes if server sends error
+        print("Error:", e.code(), e.details())
 
 
 if __name__ == "__main__":
